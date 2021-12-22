@@ -3,11 +3,13 @@ import Data.Char
 import Control.Arrow (Arrow(first))
 import Data.Attoparsec (string)
 
+import Data.Array.MArray
+import Data.Array.IO
 
--- Converte a string para int e podemos operar com ela assim
--- *Main> let i = read k :: Integer
--- *Main> i
--- 1
+
+
+
+
 strToInt x = read x :: Int
 intToStr x = show x :: String
 interface = do
@@ -31,7 +33,7 @@ interface = do
     let rest = numPalitosLinha - qtdePalitosInt
     let restStr = intToStr rest
     putStrLn ("rest:"++restStr)
-    let palitosStr = ["1", "3", restStr, "7"]
+    let palitosStr = ["1", "3", restStr, "7"] in do
     putStrLn "Configuração inicial:"
     putStrLn ("0: " ++ head palitosStr)
     putStrLn ("1: " ++ palitosStr !! 1)
@@ -76,3 +78,24 @@ main  = do {
 --         else do
 --             putStrLn ("0: " ++ palitos !! 0)
 --             putStrLn ("1: " ++ palitos !! 1)
+
+data SomeData = SomeData { array :: IOArray Int Int }
+
+menu = do
+  arr <- newArray (1,4) 1
+  let d = SomeData { array = arr }
+  writeArray (array d) 2 3
+  writeArray (array d) 3 5
+  writeArray (array d) 4 7
+  a <- readArray (array d) 3
+  b <- readArray (array d) 4
+  print (a,b)
+
+-- data SomeData = SomeData { array :: IOArray Int Float }
+
+-- amenu = do 
+--     arr <- newArray (1,) 1
+--     a <- readArray arr 1
+--     writeArray arr 1 64
+--     b <- readArray arr 1 
+--     print (a,b)
