@@ -25,7 +25,7 @@ toBin n | n `mod` 2 == 1 = toBin (n `div` 2) ++ [1]
 
 toInt xs = 4*(xs !! 0 `mod` 2) + 2* (xs !! 1 `mod` 2) + xs !! 2 `mod` 2
 
-interface2 = do
+modo_dificil = do
     read <- readFile "palitos.txt"
     palitosArr <- rList read
     let linha0Int = palitosArr !! 0
@@ -36,7 +36,7 @@ interface2 = do
     let linha1Str = intToStr linha1Int
     let linha2Str = intToStr linha2Int
     let linha3Str = intToStr linha3Int
-    putStrLn "Configuração dos palitos:"
+    putStrLn "Sua vez!!Configuração dos palitos:"
     putStrLn ("0: " ++ linha0Str)
     putStrLn ("1: " ++ linha1Str)
     putStrLn ("2: " ++ linha2Str)
@@ -56,33 +56,31 @@ interface2 = do
             let linha0Int = rest
             let linha0Str = intToStr linha0Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print () 
+            print "*"
+    else print "*" 
     if linhaInt == 1
         then do
             let linha1Int = rest
             let linha1Str = intToStr linha1Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print ()
+            print "*"
+    else print "*"
     if linhaInt == 2
         then do
             let linha2Int = rest
             let linha2Str = intToStr linha2Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print ()
+            print "*"
+    else print "*"
     if linhaInt == 3
         then do 
         let linha3Int = rest
         let linha3Str = intToStr linha3Int
-        print linha3Str
         writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-        print rest
-    else print ()
+        print "*"
+    else print "*"
     playerRead <- readFile "palitos.txt"
     playerPalitosArr <- rList playerRead
-    putStrLn ("Palitos apos jogador: "++ show playerPalitosArr)
     let max = maximum playerPalitosArr
     let maxStr = intToStr max
     if maximum playerPalitosArr /= 0
@@ -123,15 +121,13 @@ interface2 = do
         let numReverse = reverse(sumAux3)
         let numChave = toInt numReverse
         let numChaveStr = intToStr numChaveStr
-        putStrLn (show numReverse)
-        putStrLn ("Chave::  "++show numChave)
         
         if numChave <= pclinha3Int
         then do
             let rest = pclinha3Int - numChave
             let restStr = intToStr rest
             writeFile "pc.txt" ("[3," ++ restStr++"]")
-            putStrLn restStr
+            print "*"
         else print "*"
 
         if numChave <= pclinha2Int
@@ -139,7 +135,7 @@ interface2 = do
             let rest = pclinha2Int - numChave
             let restStr = intToStr rest
             writeFile "pc.txt" ("[2," ++ restStr++"]")
-            putStrLn restStr
+            print "*"
         else print "*"
         
         if numChave <= pclinha1Int
@@ -147,7 +143,7 @@ interface2 = do
             let rest = pclinha1Int - numChave
             let restStr = intToStr rest
             writeFile "pc.txt" ("[1," ++ restStr++"]")
-            putStrLn restStr
+            print "*"
         else print "*"
 
         if numChave <= pclinha0Int
@@ -155,7 +151,7 @@ interface2 = do
             let rest = pclinha0Int - numChave
             let restStr = intToStr rest
             writeFile "pc.txt" ("[0," ++ restStr++"]")
-            putStrLn restStr
+            print "*"
         else print "*"
         if pclinha0Int == 0 && pclinha1Int == 0 && pclinha2Int == 1 && pclinha3Int > pclinha2Int
         then do 
@@ -236,22 +232,22 @@ interface2 = do
                 let linha0Int = rest
                 let linha0Str = intToStr linha0Int
                 writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-                print rest
-        else print () 
+                print "*"
+        else print "*" 
         if pos == 1
             then do
                 let linha1Int = rest
                 let linha1Str = intToStr linha1Int
                 writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-                print rest
-        else print ()
+                print "*"
+        else print "*"
         if pos == 2
             then do
                 let linha2Int = rest
                 let linha2Str = intToStr linha2Int
                 writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-                print rest
-        else print ()
+                print "*"
+        else print "*"
         if pos == 3
             then do 
             let linha3Int = rest
@@ -259,25 +255,19 @@ interface2 = do
             print linha3Str
             putStrLn ("linha 2:: " ++ linha2Str)
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-    --     let linha3Int = rest
-            print rest
-        else print ()
+            print "*"
+        else print "*"
         print "*****************"
         pcRead <- readFile "palitos.txt"
         pcPalitosArr <- rList pcRead
-        let max = maximum pcPalitosArr
-        let maxStr = intToStr max
-        print ("maxStr: " ++ maxStr)
         if maximum pcPalitosArr /= 0
-            then interface2
-        else do
-            writeFile "palitos.txt" "[1,3,5,7]"
+            then modo_dificil
+        else
             putStrLn "Voce perdeu!!"
         
-    else do
-        writeFile "palitos.txt" "[1,3,5,7]"
+    else
         putStrLn "Voce ganhou!!"
-interface1 = do
+modo_facil = do
     read <- readFile "palitos.txt"
     palitosArr <- rList read
     let linha0Int = palitosArr !! 0
@@ -288,7 +278,7 @@ interface1 = do
     let linha1Str = intToStr linha1Int
     let linha2Str = intToStr linha2Int
     let linha3Str = intToStr linha3Int
-    putStrLn "Configuração dos palitos:"
+    putStrLn "Sua vez!!Configuração dos palitos:"
     putStrLn ("0: " ++ linha0Str)
     putStrLn ("1: " ++ linha1Str)
     putStrLn ("2: " ++ linha2Str)
@@ -308,36 +298,33 @@ interface1 = do
             let linha0Int = rest
             let linha0Str = intToStr linha0Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print () 
+            print "*"
+    else print "*" 
     if linhaInt == 1
         then do
             let linha1Int = rest
             let linha1Str = intToStr linha1Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print ()
+            print "*"
+    else print "*"
     if linhaInt == 2
         then do
             let linha2Int = rest
             let linha2Str = intToStr linha2Int
             writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
-            print rest
-    else print ()
+            print "*"
+    else print "*"
     if linhaInt == 3
         then do 
         let linha3Int = rest
         let linha3Str = intToStr linha3Int
-        print linha3Str
         writeFile "palitos.txt" ("[" ++ linha0Str ++ ","++ linha1Str ++ ","++ linha2Str ++ ","++ linha3Str ++ "]")
---     let linha3Int = rest
-        print rest
-    else print ()
+        print "*"
+    else print "*"
     playerRead <- readFile "palitos.txt"
     playerPalitosArr <- rList playerRead
     let max = maximum playerPalitosArr
     let maxStr = intToStr max
-    print ("x: " ++ maxStr)
     if maximum playerPalitosArr /= 0
     then do 
         let loop = do
@@ -367,41 +354,38 @@ interface1 = do
             let pclinha0Int = palitosRestantes
             let pclinha0Str = intToStr pclinha0Int
             writeFile "palitos.txt" ("[" ++ pclinha0Str ++ ","++ pclinha1Str ++ ","++ pclinha2Str ++ ","++ pclinha3Str ++ "]")
-            print rest
-        else print ()
+            print "*"
+        else print "*"
         if linhaInt == 1 
         then do 
             let pclinha1Int = palitosRestantes
             let pclinha1Str = intToStr pclinha1Int
             writeFile "palitos.txt" ("[" ++ pclinha0Str ++ ","++ pclinha1Str ++ ","++ pclinha2Str ++ ","++ pclinha3Str ++ "]")
-            print rest
-        else print ()
+            print "*"
+        else print "*"
         if linhaInt == 2 
         then do 
             let pclinha2Int = palitosRestantes
             let pclinha2Str = intToStr pclinha2Int
             writeFile "palitos.txt" ("[" ++ pclinha0Str ++ ","++ pclinha1Str ++ ","++ pclinha2Str ++ ","++ pclinha3Str ++ "]")
-            print rest
-        else print ()
+            print "*"
+        else print "*"
         if linhaInt == 3
         then do 
             let pclinha3Int = palitosRestantes
             let pclinha3Str = intToStr pclinha3Int
             writeFile "palitos.txt" ("[" ++ pclinha0Str ++ ","++ pclinha1Str ++ ","++ pclinha2Str ++ ","++ pclinha3Str ++ "]")
-            print rest
-        else print ()
+            print "*"
+        else print "*"
         pcRead <- readFile "palitos.txt"
         pcPalitosArr <- rList pcRead
         let max = maximum pcPalitosArr
         let maxStr = intToStr max
-        print ("x: " ++ maxStr)
         if maximum pcPalitosArr /= 0
-            then interface1
-        else do
-            writeFile "palitos.txt" "[1,3,5,7]"
+            then modo_facil
+        else
             putStrLn "Voce perdeu!!"
-    else do
-        writeFile "palitos.txt" "[1,3,5,7]"
+    else
         putStrLn "Voce ganhou!!"
 
 main = do {
@@ -413,11 +397,11 @@ main = do {
     if escolha == "1"
         then do 
             writeFile "palitos.txt" "[1,3,5,7]"
-            interface1;
+            modo_facil;
     else if escolha == "2" 
         then do
-        writeFile "palitos.txt" "[1,3,5,7]"
-        interface2;
+        writeFile "palitos.txt" "[1,3,0,7]"
+        modo_dificil;
         else
             putStrLn "Valor inválido";
 }   
