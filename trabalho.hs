@@ -1,3 +1,4 @@
+-- Matheus Avila Moreira de Paula/201565191C Matheus Estevão Faria 201635080
 import Data.List
 import Data.Char
 import Control.Arrow (Arrow(first))
